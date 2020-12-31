@@ -26,17 +26,20 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Ce champ ne peut pas être null")
      */
     private $userName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Ce champ ne peut pas être null")
      * @Assert\Email
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Ce champ ne peut pas être null")
      * @Assert\Length(
      * min = 8,
      * minMessage = "Votre mot de passe doit faire minimum 8 caractères")
@@ -44,6 +47,7 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @Assert\NotBlank
      * @Assert\EqualTo(propertyPath="password",
      * message = "Vous n'avez pas tapé le même mot de passe")
      */
@@ -60,7 +64,7 @@ class User implements UserInterface
         return $this->userName;
     }
 
-    public function setUserName(string $userName): self
+    public function setUserName(?string $userName): self
     {
         $this->userName = $userName;
 
@@ -72,7 +76,7 @@ class User implements UserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -84,7 +88,7 @@ class User implements UserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
@@ -96,7 +100,7 @@ class User implements UserInterface
         return $this->confirmPassword;
     }
 
-    public function setConfirmPassword(string $confirmPassword): self
+    public function setConfirmPassword(?string $confirmPassword): self
     {
         $this->confirmPassword = $confirmPassword;
 

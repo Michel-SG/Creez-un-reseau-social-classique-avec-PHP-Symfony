@@ -4,12 +4,16 @@
 {% block title %}Singup{% endblock %}
 
 {% block body %}
-    <h2 class="text-center mt-4">Veuillez vous Inscrire </h2>
-    {{ form_start(form) }}
-    {{ form_row(form.userName, {'label': 'Pseudo', 'attr': {'placeholder': 'Entrer votre Pseudo ...'}}) }}
-    {{ form_row(form.email, {'label': 'Email', 'attr': {'placeholder': 'Entrer votre email ...'}}) }}
-    {{ form_row(form.password, {'label': 'Mot de passe', 'attr': {'placeholder': 'Entrer votre mot de passe !'}}) }}
-    {{ form_row(form.confirmPassword, {'label': 'Confirmation mot de passe', 'attr': {'placeholder': 'Confirmer le mot de passe'}}) }}
-    <button type="submit" class="btn btn-primary"> Valider</button>
-    {{ form_end(form) }}
+    <h1 class="text-center mt-4 mb-4">Veuillez vous Inscrire </h1>
+    <div class='row ' >
+        <div class='col-md-6 mx-auto'>
+            {{ form_start(form) }}
+            {{ form_row(form.userName, {'label': 'Pseudo', 'attr': {'placeholder': 'Entrer votre Pseudo ...'}}) }}
+            {{ form_row(form.email, {'label': 'Email', 'attr': {'placeholder': 'Entrer votre email ...'}}) }}
+            {{ form_row(form.password, {'label': 'Mot de passe', 'attr': {'placeholder': 'Entrer votre mot de passe !'}}) }}
+            {{ form_row(form.confirmPassword, {'label': 'Confirmation mot de passe', 'attr': {'placeholder': 'Confirmer le mot de passe'}}) }}
+            <button type="submit" class="btn btn-primary"> Valider</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}

@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/signup", name="app_signup")
+     * @Route("/signup", name="app_signup", methods={"GET","POST"})
      */
     public function signup(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder ): Response
     {
@@ -41,13 +41,10 @@ class SecurityController extends AbstractController
 
 
     /**
-     * @Route("/signin", name="app_signin")
+     * @Route("/signin", name="app_signin", methods={"GET", "POST"})
      */
     public function signin(): Response
     {
-
-        return $this->render('security/signin.html.twig', [
-            'message' => "messageView"
-        ]);
+        return $this->render('security/signin.html.twig');
     }
 }
