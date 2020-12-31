@@ -18,14 +18,15 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-
+        
         <div class="collapse navbar-collapse " id="navbarColor01">
           <ul class="navbar-nav ml-auto mr-5">
+          {% if not app.user %}
             <li class="nav-item active">
-              <a class="nav-link " href="{{ path('app_signin') }}">Connection
-                
+              <a class="nav-link " href="{{ path('app_signin') }}">Connection  
               </a>
             </li>
+            {% else %}
             <li class="nav-item">
               <a class="nav-link  " href="{{ path('app_signup') }}">Inscription
                 
@@ -38,8 +39,9 @@
               <a class="nav-link  " href="{{ path('app_pins') }}">Pints</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link  " href="#">déconnection</a>
-            </li>  
+              <a class="nav-link  " href="{{ path('app_logout') }}">deconnection</a>
+            </li> 
+            {% endif %} 
           </ul>
         </div>
       </nav>
