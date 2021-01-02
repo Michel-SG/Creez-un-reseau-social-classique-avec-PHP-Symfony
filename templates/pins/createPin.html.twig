@@ -1,25 +1,26 @@
 {% extends 'base.html.twig' %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-{% block title %}PinsPage{% endblock %}
+
+{% block title %}CreatePin{% endblock %}
+
 
 {% block body %}
-
-
-<div class="example-wrapper">
-    <h1 class="text-center mt-4 mb-4">Liste les pins </h1>
+    <div class="example-wrapper">
+    <h1 class="text-center mt-4 mb-4">créer un pin </h1>
     <div class='row ' >
         <div class='col-md-6 mx-auto'>
             {{ form_start(form) }}
-            {{ form_row(form.title, {'label': 'Titre', 'attr': {'placeholder': 'Entrer le titre ...'}}) }}
+            {{ form_row(form.title, { 'attr': {'placeholder': 'Entrer le titre ...'}}) }}
             {{ form_row(form.content, {'label': 'Description', 'attr': {'placeholder': 'Entrer la description ...'}}) }}
             {{ form_row(form.image, {'label': 'Image', 'attr': {'placeholder': 'Charger une image ...'}}) }}
             
             <button type="submit" class="btn btn-primary"> Valider</button>
             {{ form_end(form) }}
+
         </div>
     </div>
-
-   
 </div>
+
+
 {% endblock %}

@@ -19,6 +19,10 @@ class SecurityController extends AbstractController
      */
     public function signup(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder ): Response
     {
+        //if($this->getUser()){
+          //  $this->addFlash('error', 'Vous êtes déjà connecté !');
+         //   return  $this->redirectToRoute('app_displaypins');
+        //}
         $user = new User;
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
@@ -45,6 +49,10 @@ class SecurityController extends AbstractController
      */
     public function signin(): Response
     {
+        //if($this->getUser()){
+          //  $this->addFlash('error', 'Vous êtes déjà connecté !');
+         //   return  $this->redirectToRoute('app_displaypins');
+        //}
         return $this->render('security/signin.html.twig');
     }
 
