@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -53,6 +55,16 @@ class User implements UserInterface
      */
 
     private $confirmPassword;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Pin::class, mappedBy="pins", orphanRemoval=true)
+     */
+    private $pins;
+
+    public function __construct()
+    {
+        $this->pins = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,5 +131,35 @@ class User implements UserInterface
     public function getSalt()
     {
         //return null;
+    }
+
+    /**
+     * @return Collection|Pin[]
+     */
+    public function getPins(): Collection
+    {
+        return $this->pins;
+    }
+
+    public function addPin(Pin $pin): self
+    {
+        if (!$this->pins->contains($pin)) {
+            $this->pins[] = $pin;
+            $pin->setPins($this);
+        }
+
+        return $this;
+    }
+
+    public function removePin(Pin $pin): self
+    {
+        if ($this->pins->removeElement($pin)) {
+            // set the owning side to null (unless already changed)
+            if ($pin->getPins() === $this) {
+                $pin->setPins(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -9,7 +9,8 @@
 import './styles/app.scss';
 
 // Need jQuery? install with "yarn add jquery" 
-import $ from'jquery';
+import $ from 'jQuery';
+global.$ = global.jQuery = $;
 
 
 // start the Stimulus application
