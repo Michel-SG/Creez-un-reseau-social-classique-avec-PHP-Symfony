@@ -6,20 +6,27 @@
 
 
 <div class="example-wrapper">
-    <h1 class="text-center mt-4 mb-4">Liste les pins </h1>
-    <p class='text-center'>
+    <h1 class="text-center mt-4 mb-4">Liste les pins ( {{ pluralize(pins|length, 'Pin', 'Pints')}} ) </h1>
+    <p class='text-center mb-4'>
         <a  href="{{ path('app_createpin') }}"><button class='btn btn-primary'>Créer un pin</button></a>
     </p>
+   
     {% for pin in pins %}
-    <div class='row ' >
-        <article>
-           <h3>{{ pin.title }}</h3>
-           <div class='metadata'>Ecrit le {{ pin.createdAt | date('d/m/Y') }} 
-           à {{ pin.createdAt | date('H:i') }}</div>
-           <img src="{{ pin.image }}" alt="">
-           <p>{{ pin.content | raw }}</p>    
-        </article>
+    <div class='row mb-4' >
+        <div class='col-md-6 mx-auto '>
+            <div class="card"> 
+                <img src="{{ pin.image }}" alt="">
+                <div class="card-body w-40 mx-auto">
+                    <h5 class="card-title ">{{ pin.title }}</h5>
+                    <p class='card-text '>Ecrit le {{ pin.createdAt | date('d/m/Y') }} 
+                        à {{ pin.createdAt | date('H:i') }}</p>
+                    <p class="card-text ">{{ pin.content | raw }}</p> 
+                </div>   
+            </div>
+        </div>
     </div>
+     {% else %}
+        <p>Désolé, aucun pin n'est encore créer !</p>
      {% endfor %}
 </div>
 {% endblock %}
