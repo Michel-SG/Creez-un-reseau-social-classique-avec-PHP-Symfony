@@ -50,4 +50,14 @@ class PinsController extends AbstractController
             'pins' => $repo->findAll()
         ]);
     }
+
+    /**
+     * @Route("/showOne/{id<[0-9]>}", name="app_onePinShow", methods={"GET"})
+     */
+     public function showOnePin(Pin $pin): Response
+     {
+         
+ 
+         return $this->render('pins/showOnePin.html.twig', compact('pin'));
+     }
 }
