@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title user.userName %}
+
+{% block body %}
+
+    <h1 class="text-center mt-4 mb-4">Votre profile</h1>
+    <div class="row">
+        <div class ="col-md-6 mx-auto">
+            <ul class="list-group">
+                <li class="list-group-item">Prénom : {{ user.userName }}</li>
+                <li class="list-group-item">Email : {{ user.email }}</li>
+                <li class="list-group-item">Mot de passe : c'est sécret ...</li>
+            </ul>
+        </div>
+    </div>
+
+
+{% endblock %}
