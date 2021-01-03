@@ -47,7 +47,7 @@ class PinsController extends AbstractController
     {
 
         return $this->render('pins/displayPins.html.twig', [
-            'pins' => $repo->findAll()
+            'pins' => $repo->findBy([], ['createdAt' => 'DESC'])
         ]);
     }
 
