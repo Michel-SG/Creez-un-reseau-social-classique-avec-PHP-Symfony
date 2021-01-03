@@ -11,10 +11,9 @@
     <div class='row ' >
         <div class='col-md-6 mx-auto'>
             {{ form_start(form) }}
+            {{ form_row(form.image, {'label': 'Image', 'attr': {'placeholder': 'Charger une image ...'}}) }}
             {{ form_row(form.title, { 'attr': {'placeholder': 'Entrer le titre ...'}}) }}
             {{ form_row(form.content, {'label': 'Description', 'attr': {'placeholder': 'Entrer la description ...'}}) }}
-            {{ form_row(form.image, {'label': 'Image', 'attr': {'placeholder': 'Charger une image ...'}}) }}
-            
             <button type="submit" class="btn btn-primary"> Valider</button>
             {{ form_end(form) }}
 

@@ -15,6 +15,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PinsController extends AbstractController
 {
+    //private $em;
+    //public function _construct(EntityManagerInterface $em){
+    //    $this->em = $em;
+   // }
 
     /**
      * @Route("/pin/create", name="app_createpin", methods={"GET","POST"})
@@ -56,8 +60,25 @@ class PinsController extends AbstractController
      */
      public function showOnePin(Pin $pin): Response
      {
+        return $this->render('pins/showOnePin.html.twig', compact('pin'));
+     }
+
+      /**
+     * @Route("/showOne/{id<[0-9]>}/edit", name="app_editPin", methods={"GET", "POST"})
+     */
+     public function editPin(Request $request, EntityManagerInterface $em, Pin $pin): Response
+     {
          
- 
-         return $this->render('pins/showOnePin.html.twig', compact('pin'));
+        $form = $this->createForm(PinType::class, $pin);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){            
+            $em->flush();
+
+            return $this->redirectToRoute('app_displaypins');
+        }
+         return $this->render('pins/editPin.html.twig', [
+             'pin' => $pin,
+            'form' => $form->createView()
+         ]);
      }
 }

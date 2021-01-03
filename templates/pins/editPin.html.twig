@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title 'Edit pin #'~ pin.id %}
+
+{% block body %}
+
+    <div class="example-wrapper">
+        <h1 class="text-center mt-4 mb-4">Editer le pin #{{ pin.id }} </h1>
+        <div class='row mb-4' >
+            <div class='col-md-6 mx-auto '>
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button type= "submit" class='btn btn-primary mt-2'>Valider l'édition</button>
+                {{ form_end(form) }}
+                <a href="{{ path('app_onePinShow', {id: pin.id}) }}" ><button class='btn btn-primary mt-4'>Retour</button></a>
+            </div>
+        </div>
+        
+    </div>
+{% endblock %}

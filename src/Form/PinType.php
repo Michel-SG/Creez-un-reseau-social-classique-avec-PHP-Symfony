@@ -14,9 +14,10 @@ class PinType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('image')
             ->add('title', TextType::class, ['label'=>'Titre'])
             ->add('content', TextareaType::class)
-            ->add('image')
+            
             
             
            
