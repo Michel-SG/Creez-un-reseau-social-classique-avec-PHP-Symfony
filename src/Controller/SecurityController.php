@@ -45,14 +45,15 @@ class SecurityController extends AbstractController
 
 
     /**
-     * @Route("/signin", name="app_signin", methods={"GET", "POST"})
+     * @Route("/", name="app_signin", methods={"GET", "POST"})
      */
     public function signin(): Response
     {
-        //if($this->getUser()){
-          //  $this->addFlash('error', 'Vous êtes déjà connecté !');
-         //   return  $this->redirectToRoute('app_displaypins');
-        //}
+        if($this->getUser()){
+            $this->addFlash('error', 'Vous êtes déjà connecté !');
+            return  $this->redirectToRoute('app_displaypins');
+        }
+        
         return $this->render('security/signin.html.twig');
     }
 

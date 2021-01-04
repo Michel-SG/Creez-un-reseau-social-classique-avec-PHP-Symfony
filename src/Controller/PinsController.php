@@ -45,7 +45,7 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/", name="app_displaypins", methods={"GET"})
+     * @Route("/pins", name="app_displaypins", methods={"GET"})
      */
     public function displayPins(PinRepository $repo): Response
     {
