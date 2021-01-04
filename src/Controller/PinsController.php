@@ -64,7 +64,7 @@ class PinsController extends AbstractController
      }
 
       /**
-     * @Route("/showOne/{id<[0-9]>}/edit", name="app_editPin", methods={"GET", "PUT"})
+     * @Route("/showOne/{id<[0-9]+>}/edit", name="app_editPin", methods={"GET", "PUT"})
      */
      public function editPin(Request $request, EntityManagerInterface $em, Pin $pin): Response
      {
@@ -84,5 +84,18 @@ class PinsController extends AbstractController
              'pin' => $pin,
             'form' => $form->createView()
          ]);
+     }
+
+      /**
+     * @Route("/showOne/{id<[0-9]+>}/delete", name="app_deletePin", methods={"DELETE"})
+     */
+     public function delete(Request $request, Pin $pin, EntityManagerInterface $em): Response
+     {
+         
+         if($this->isCsrfTokenValid('delete_pint_' . $pin->getId(), $request->request->get('csrf_token')))
+         $em->remove($pin);
+         $em->flush();
+
+         return $this->redirectToRoute('app_displaypins');      
      }
 }

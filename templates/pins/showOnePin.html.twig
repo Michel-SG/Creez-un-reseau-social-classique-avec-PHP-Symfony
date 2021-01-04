@@ -6,7 +6,7 @@
 
 
 <div class="example-wrapper">
-    <h1 class="text-center mt-4 mb-4">Le pin </h1>
+    <h1 class="text-center mt-4 mb-4">Le pin #{{ pin.id }} </h1>
     <div class='row mb-4' >
         <div class='col-md-6 mx-auto '>
             <div class="card"> 
@@ -18,7 +18,13 @@
                     <p class="card-text ">{{ pin.content | raw }}</p>
                 </div>
                 <div class="text-right">
-                    <a class="mr-1" href="{{ path('app_editPin', {id: pin.id}) }}"><button class='btn btn-primary mb-2'>Editer</button></a> 
+                    <a class="mr-1" href="{{ path('app_editPin', {id: pin.id}) }}"><button class='btn btn-primary mb-2'>Editer</button></a>
+                    <button onclick="event.preventDefault(); confirm('êtes vous sûr de vouvoir supprimer ?') && 
+                    document.getElementById('delete-form').submit();" class='btn btn-primary mb-2'>Supprimer</button>
+                    <form id="delete-form" action="{{ path('app_deletePin', {id: pin.id}) }}" method="POST">
+                        <input type='hidden' name="csrf_token" value ="{{ csrf_token('delete_pint_'~ pin.id) }}"/>
+                        <input type="hidden" name="_method" value="DELETE"/> 
+                    </form>
                 </div>   
             </div>
             <a href="{{ path('app_displaypins') }}"><button class='btn btn-primary mt-2'>Retour</button></a>
