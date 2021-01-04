@@ -27,7 +27,7 @@ class PinsController extends AbstractController
     /**
      * @Route("/pin/create", name="app_createpin", methods={"GET","POST"})
      */
-    public function createPin(Request $request, EntityManagerInterface $em, UserRepository $userRepo): Response
+    public function createPin(Request $request, EntityManagerInterface $em, UserRepository $userRepo, SluggerInterface $slugger): Response
     {
 
         $pin = new Pin;
@@ -35,9 +35,32 @@ class PinsController extends AbstractController
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()){
-            /** @var UploadedFile $brochureFile */
+            /** @var UploadedFile $imageFile */
             $imageFile = $form->get('image')->getData();
-            $pin->setCreatedAt(new \DateTime());
+
+             // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    throw $e;
+                }
+                 // updates the 'brochureFilename' property to store the PDF or JPEG file name
+                // instead of its contents
+                $pin->setImage($newFilename);
+            }
+
+            //$pin->setCreatedAt(new \DateTime());
             $pin->setPins($this->getUser());
             $em->persist($pin);
             $em->flush();
@@ -64,7 +87,7 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/showOne/{id<[0-9]>}", name="app_onePinShow", methods={"GET"})
+     * @Route("/showOne/{id<[0-9]+>}", name="app_onePinShow", methods={"GET"})
      */
      public function showOnePin(Pin $pin): Response
      {

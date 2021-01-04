@@ -21,3 +21,8 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> custum env vars ###
+/public/uploads/images/
+###< symfony/phpunit-bridge ###
+

@@ -17,7 +17,7 @@ class PinType extends AbstractType
     {
         $builder
         ->add('image', FileType::class, [
-            'label' => 'Brochure (PDF file)',
+            'label' => 'fichier en (JPG, JPEG ou PDF)',
 
             // unmapped means that this field is not associated to any entity property
             'mapped' => false,
@@ -25,6 +25,7 @@ class PinType extends AbstractType
             // make it optional so you don't have to re-upload the PDF file
             // every time you edit the Product details
             'required' => false,
+            
 
             // unmapped fields can't define their validation using annotations
             // in the associated entity, so you can use the PHP constraint classes
@@ -32,10 +33,13 @@ class PinType extends AbstractType
                 new File([
                     'maxSize' => '1024k',
                     'mimeTypes' => [
-                        'application/pdf',
-                        'application/x-pdf',
+                        'image/jpg',
+                        'image/jpeg',
+                        'image/png',
+                        'image/pdf',
+                        'image/x-pdf',
                     ],
-                    'mimeTypesMessage' => 'Please upload a valid PDF document',
+                    'mimeTypesMessage' => 'Please upload a valid PDF, JPG or JPEG document',
                 ])
             ],
         ])

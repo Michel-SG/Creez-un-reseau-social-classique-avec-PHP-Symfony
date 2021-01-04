@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Entity;
-
 use App\Repository\PinRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -48,6 +47,7 @@ class Pin
      * @ORM\Column(type="datetime", options={"default":"CURRENT_TIMESTAMP"})
      */
     private $updatedAt;
+    
 
     public function getId(): ?int
     {
@@ -132,9 +132,9 @@ class Pin
      */
      public function updateTimestamps(): void
      {
-         //if($this->getCreatedAt() === null ){
-         //$this->createdAt(new \DateTimeImmutable);
-        // }
+         if($this->getCreatedAt() === null ){
+         $this->setCreatedAt(new \DateTimeImmutable);
+         }
         $this->setUpdatedAt(new \DateTimeImmutable);
      }
 }
