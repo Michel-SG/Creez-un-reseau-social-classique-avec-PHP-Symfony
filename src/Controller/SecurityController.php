@@ -35,6 +35,7 @@ class SecurityController extends AbstractController
             $em->persist($user);
             $em->flush();
 
+            $this->addFlash('success', 'Votre compte a été crée avec succès !');
             return $this->redirectToRoute('app_signin');
         }
 
