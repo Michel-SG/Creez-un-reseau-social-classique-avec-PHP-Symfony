@@ -127,7 +127,7 @@ class PinsController extends AbstractController
                 } catch (FileException $e) {
                     throw $e;
                 }
-                 // updates the 'brochureFilename' property to store the PDF or JPEG file name
+                 // updates the 'image' property to store the PDF or JPEG file name
                 // instead of its contents
                 $pin->setImage($newFilename);
             }          
