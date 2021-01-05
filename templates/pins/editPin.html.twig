@@ -10,7 +10,12 @@
         <div class='row mb-4' >
             <div class='col-md-6 mx-auto '>
                 {{ form_start(form) }}
+                   
                     {{ form_widget(form) }}
+                     <a class="mr-1 text-right mt-2 mb-3" href="{{ path('app_onePinShow', {id: pin.id}) }}"> 
+                        <img src="{{ asset('uploads/images/' ~ pin.image) }}" alt="">
+                    </a>
+
                     <button type= "submit" class='btn btn-primary mt-2'>Valider l'édition</button>
                 {{ form_end(form) }}
                 <a href="{{ path('app_onePinShow', {id: pin.id}) }}" ><button class='btn btn-primary mt-4'>Retour</button></a>

@@ -97,7 +97,7 @@ class PinsController extends AbstractController
       /**
      * @Route("/showOne/{id<[0-9]+>}/edit", name="app_editPin", methods={"GET", "PUT"})
      */
-     public function editPin(Request $request, EntityManagerInterface $em, Pin $pin): Response
+     public function editPin(Request $request, EntityManagerInterface $em, Pin $pin, SluggerInterface $slugger): Response
      {
          
         $form = $this->createForm(PinType::class, $pin, [
@@ -106,7 +106,31 @@ class PinsController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){            
+        if($form->isSubmitted() && $form->isValid()){  
+             /** @var UploadedFile $imageFile */
+             $imageFile = $form->get('image')->getData();
+
+             // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    throw $e;
+                }
+                 // updates the 'brochureFilename' property to store the PDF or JPEG file name
+                // instead of its contents
+                $pin->setImage($newFilename);
+            }          
             $em->flush();
 
             $this->addFlash('success', 'Le pint a été modifié avec succès !');
@@ -126,10 +150,14 @@ class PinsController extends AbstractController
      {
          
          if($this->isCsrfTokenValid('delete_pint_' . $pin->getId(), $request->request->get('csrf_token')))
+         $imageName = $pin->getImage();
+         //delete file in directory
+         unlink($this->getParameter('images_directory').'/'.$imageName);
+         //delete file in database
          $em->remove($pin);
          $em->flush();
 
          $this->addFlash('info', 'Le pint a été supprimé avec succès !');
          return $this->redirectToRoute('app_displaypins');      
-     }
+    }
 }

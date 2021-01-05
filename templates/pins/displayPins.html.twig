@@ -15,8 +15,8 @@
     <div class='row mb-4' >
         <div class='col-md-6 mx-auto '>
             <div class="card">
-                <a class="mr-1" href="{{ path('app_onePinShow', {id: pin.id}) }}"> 
-                <img src="{{ pin.image }}" alt="">
+                <a class="mr-1 text-center mt-2" href="{{ path('app_onePinShow', {id: pin.id}) }}"> 
+                <img src="{{ asset('uploads/images/' ~ pin.image) }}" alt="">
                 </a>
                 <div class="card-body w-40 mx-auto text-break">
                     <h5 class="card-title ">{{ pin.title }}</h5>
