@@ -14,15 +14,15 @@
     {% for pin in pins %}
     <div class='row mb-4' >
         <div class='col-md-6 mx-auto '>
-            <div class="card">
+            <div class=" pin card shadow bg-wight ">
                 <a class="mr-1 text-center mt-2" href="{{ path('app_onePinShow', {id: pin.id}) }}"> 
-                <img src="{{ asset('uploads/images/' ~ pin.image) }}" alt="">
+                <img src="{{ asset('uploads/images/' ~ pin.image) }}" alt="{{ pin.title }}">
                 </a>
                 <div class="card-body w-40 mx-auto text-break">
-                    <h5 class="card-title ">{{ pin.title }}</h5>
-                    <p class='card-text '>Ecrit le {{ pin.createdAt | date('d/m/Y') }} 
-                        à {{ pin.createdAt | date('H:i') }}</p>
-                    <p class="card-text ">{{ pin.content | raw }}</p>
+                    <h5 class="card-title font-weight-bold ">{{ pin.title }}</h5>
+                    <p class='card-text '> Posté le {{ pin.createdAt | date('d/m/Y') }} 
+                        à {{ pin.createdAt | date('H:i') }} par {{ pin.pins.userName }}</p>
+                    <p class="card-text "> {{ pin.content | raw }}</p>
                 </div>
                 <div class="text-right">
                     <a class="mr-1" href="{{ path('app_onePinShow', {id: pin.id}) }}"><button class='btn btn-primary mb-2'>Voir la description</button></a> 

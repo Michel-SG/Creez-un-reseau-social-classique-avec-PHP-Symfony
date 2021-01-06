@@ -8,12 +8,12 @@
     <div class="example-wrapper">
         <h1 class="text-center mt-4 mb-4">Editer le pin #{{ pin.id }} </h1>
         <div class='row mb-4' >
-            <div class='col-md-6 mx-auto '>
+            <div class='pin col-md-6 mx-auto '>
                 {{ form_start(form) }}
                    
                     {{ form_widget(form) }}
                      <a class="mr-1 text-right mt-2 mb-3" href="{{ path('app_onePinShow', {id: pin.id}) }}"> 
-                        <img src="{{ asset('uploads/images/' ~ pin.image) }}" alt="">
+                        <img src="{{ asset('uploads/images/' ~ pin.image) }}" alt="{{ pin.title }}">
                     </a>
 
                     <button type= "submit" class='btn btn-primary mt-2 ml-3'>Valider vos modification</button>
