@@ -46,7 +46,7 @@ class SecurityController extends AbstractController
 
 
     /**
-     * @Route("/", name="app_signin", methods={"GET", "POST"})
+     * @Route("/login", name="app_signin", methods={"GET", "POST"})
      */
     public function signin(): Response
     {

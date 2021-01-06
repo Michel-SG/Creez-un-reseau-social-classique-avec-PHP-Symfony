@@ -20,7 +20,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class PinsController extends AbstractController
 {
     //private $em;
-    //public function _construct(EntityManagerInterface $em){
+    //public function __construct(EntityManagerInterface $em){
     //    $this->em = $em;
    // }
 
@@ -29,6 +29,9 @@ class PinsController extends AbstractController
      */
     public function createPin(Request $request, EntityManagerInterface $em, UserRepository $userRepo, SluggerInterface $slugger): Response
     {
+        if(!$this->getUser()){
+            return $this->redirectToRoute('app_signin');
+        }
 
         $pin = new Pin;
         $form = $this->createForm(PinType::class, $pin);
@@ -76,7 +79,7 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/pins", name="app_displaypins", methods={"GET"})
+     * @Route("/", name="app_displaypins", methods={"GET"})
      */
     public function displayPins(PinRepository $repo): Response
     {
@@ -91,6 +94,9 @@ class PinsController extends AbstractController
      */
      public function showOnePin(Pin $pin): Response
      {
+        if(!$this->getUser()){
+            return $this->redirectToRoute('app_signin');
+        }
         return $this->render('pins/showOnePin.html.twig', compact('pin'));
      }
 
@@ -152,7 +158,9 @@ class PinsController extends AbstractController
          if($this->isCsrfTokenValid('delete_pint_' . $pin->getId(), $request->request->get('csrf_token')))
          $imageName = $pin->getImage();
          //delete file in directory
+         if($imageName){
          unlink($this->getParameter('images_directory').'/'.$imageName);
+         }
          //delete file in database
          $em->remove($pin);
          $em->flush();
