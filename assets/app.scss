@@ -1,0 +1,33 @@
+@import 'styles/shared/variables';
+@import "~bootswatch/dist/flatly/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/flatly/bootswatch";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+body {
+    /*background-color: lightgray;*/
+    font-family: 'Montserrat', sans-serif;
+}
+h1{
+    font-size:1.3rem;
+    font-weight: bold;
+}
+
+.alert{
+    padding: 10px;
+    color: #FFF;
+    text-align: center;
+}
+ .alert-success{
+    background-color: #15DEA5;
+    }
+
+.alert-info{
+    background-color: #E91E63;
+    }
+
+.pin img{
+    transition: transform 0.3s ease-out;
+    &:hover{
+        transform: scale(1.075);
+    }
+}
