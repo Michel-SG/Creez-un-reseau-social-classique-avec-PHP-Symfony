@@ -14,6 +14,7 @@
             {{ form_row(form.confirmPassword, {'label': 'Confirmation mot de passe', 'attr': {'placeholder': 'Confirmer le mot de passe'}}) }}
             <button type="submit" class="btn btn-primary"> Valider</button>
             {{ form_end(form) }}
-        </div>
+                     <p class="mb-3 mt-2 text-muted text-center">Avez-vous déjà un compte ? <a href="{{ path('app_signin') }}">Connectez-vous</a></p>
+        </div>             
     </div>
 {% endblock %}

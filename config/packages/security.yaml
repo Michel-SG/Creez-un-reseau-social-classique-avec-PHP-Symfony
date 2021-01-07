@@ -28,6 +28,10 @@ security:
                 path: app_logout
                 target: app_displaypins
 
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 

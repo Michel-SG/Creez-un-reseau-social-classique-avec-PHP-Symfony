@@ -105,7 +105,7 @@ class PinsController extends AbstractController
      */
      public function editPin(Request $request, EntityManagerInterface $em, Pin $pin, SluggerInterface $slugger): Response
      {
-         
+
         $form = $this->createForm(PinType::class, $pin, [
             'method' => 'PUT'
         ]);
@@ -155,7 +155,7 @@ class PinsController extends AbstractController
      public function delete(Request $request, Pin $pin, EntityManagerInterface $em): Response
      {
          
-         if($this->isCsrfTokenValid('delete_pint_' . $pin->getId(), $request->request->get('csrf_token')))
+         if($this->isCsrfTokenValid('delete_pint_' . $pin->getId(), $request->request->get('csrf_token'))){
          $imageName = $pin->getImage();
          //delete file in directory
          if($imageName){
@@ -164,8 +164,9 @@ class PinsController extends AbstractController
          //delete file in database
          $em->remove($pin);
          $em->flush();
-
+         
          $this->addFlash('info', 'Le pint a été supprimé avec succès !');
+         }
          return $this->redirectToRoute('app_displaypins');      
     }
 }

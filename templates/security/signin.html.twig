@@ -18,9 +18,15 @@
                     <label for="password"> Mot de passe</label>
                     <input type="password" id="password" required class="form-control" placeholder="Entrer votre mot de passe ! " name="_password">
                 </div>
+                <div class="form-group">
+                   <input type="checkbox" id="remember_me" name="_remember_me" />
+                   <label for="remember_me">Se rappeler de moi</label>
+                </div>
                 <button type="submit" class="btn btn-primary"> Valider</button>
             </form>
+             <p class="mb-3 mt-2 text-muted text-center">N'avez-vous pas encore de compte ? <a href="{{ path('app_signup') }}">Créez votre compte</a></p>
              <a href="{{ path('app_displaypins') }}"><button class='btn btn-primary mt-2'>Page d'accueil</button></a>
+            
         </div>
     </div>
     
