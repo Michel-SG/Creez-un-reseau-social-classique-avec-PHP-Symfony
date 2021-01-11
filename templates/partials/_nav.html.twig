@@ -21,8 +21,11 @@
                 <a class="nav-link  " href="{{ path('app_displaypins') }}">Pints</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="{{ path('app_logout') }}">deconnection</a>
-            </li> 
+                <a class="nav-link  " href="#" onclick="event.preventDefault(); document.getElementById('js-csrf-logout').submit();">deconnection</a>
+            </li>
+            <form id="js-csrf-logout" action="{{ path('app_logout') }}" method="POST">
+                <input type='hidden' name="_csrf_token" value ="{{ csrf_token('logout') }}"/>
+            </form>
             {% endif %} 
         </ul>
     </div>
